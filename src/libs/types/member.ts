@@ -9,11 +9,11 @@ export interface Member{
     memberStatus: MemberStatus;
     memberNick: string;
     memberEmail: string,
+    memberReservation: string;
     memberLocation: string,
     memberPhone: string;
     memberPassword?: string;
     memberAddress?: string;
-    memberDesc?: string;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -22,4 +22,18 @@ export interface Member{
 export interface LoginInput{
     memberEmail: string;
     memberPassword: string;
+}
+
+export interface MemberInput{
+    memberType?: MemberType;
+    memberStatus?: MemberStatus;
+    memberEmail: string;
+    memberNick: string;
+    memberPhone: string;
+    memberPassword: string;
+    memberAddress: string;
+}
+
+export interface AdminRequest extends Request{
+    member: Member;
 }

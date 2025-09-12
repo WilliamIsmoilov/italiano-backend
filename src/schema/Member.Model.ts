@@ -17,18 +17,15 @@ const memberSchema = new Schema({
 
     memberNick: {
         type: String,
-        required: [true, 'Please add a name'],
+        required: true,
         unique: true,
-        trim: true,
     },
 
     memberEmail: {
         type: String,
-        match: [
-             /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-        ],
-        required: [true, 'Please add an email'],
-        index: {unique: true, sparse: true}
+        match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        required: true,
+        unique: true
     },
 
     memberPhone: {

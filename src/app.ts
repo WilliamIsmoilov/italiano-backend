@@ -2,16 +2,19 @@ import express from 'express';
 import path from "path";
 import routerAdmin from './router-admin';
 import router from './router';
+import cookieParser from 'cookie-parser';
 
 
 
-
-
-const app = express();
 //entrance
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({extended: true}));
+const app = express();
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 //json webToken
 
