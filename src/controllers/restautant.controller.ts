@@ -59,7 +59,6 @@ restaurantController.processSignup = async ( req: AdminRequest, res: Response) =
         console.log('body:', req.body)
         const newMember: MemberInput = req.body;
         newMember.memberType = MemberType.RESTAURANT;
-
         const result = await memberService.processSignup(newMember);
         res.send(result);
     } catch (err) {

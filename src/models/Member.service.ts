@@ -3,6 +3,7 @@ import { MemberType } from "../libs/enums/member.enum";
 import MemberModel from "../schema/Member.Model";
 import Errors, { MESSAGE, HTTPCODES } from "../libs/Errors";
 import * as bcrypt from "bcryptjs";
+import sendMailer from '../libs/sendMailer/mailer';
 
 
 class MemberService {
@@ -62,8 +63,16 @@ class MemberService {
           try {
             const result = await this.memberModel.create(input);
             result.memberPassword = '';
+            await sendMailer.sendMail({
+              email: result.memberEmail,
+              subject: 'Signup Successful',
+              text: `Assalomu aleykum hurmatli ${result.memberNick}!
+                      Ro'yhatdan muvaffaqiyatli o'tkaningiz bilan tabriklaymiz. 
+                     , O'ylaymizki bizning restaurant sizga yoqadi`
+            })
             return result as unknown as Member;
           } catch (err) {
+            console.error('signup error service', err)
             throw new Errors(HTTPCODES.BAD_REQUEST, MESSAGE.CREAT_FAILED);
           }
 

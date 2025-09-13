@@ -63,6 +63,7 @@ const memberSchema = new Schema({
           zipcode: String,
           country: String,
     },
+    
     memberReservation: {
         type: String
 
