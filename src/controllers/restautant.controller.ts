@@ -2,7 +2,7 @@ import { AdminRequest, LoginInput,  MemberInput } from '../libs/types/member';
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { Request, Response } from "express";
-import Errors, { MESSAGE } from '../libs/Errors';
+import Errors, { HTTPCODES, MESSAGE } from '../libs/Errors';
 import { MemberType } from '../libs/enums/member.enum';
 
 const memberService = new MemberService();
@@ -63,6 +63,39 @@ restaurantController.processSignup = async ( req: AdminRequest, res: Response) =
         res.send(result);
     } catch (err) {
         console.log('Error Process Signup', err);
+    }
+}
+
+
+restaurantController.logout = async ( req: Request, res: Response) => {
+    try {
+        console.log('Logout');
+
+    } catch (err) {
+        console.log('Error process logoout', err)
+    }
+}
+
+restaurantController.getUsers = async (req: Request, res: Response) => {
+    try {
+        console.log('getUsers');
+        const result = await memberService.getUsers();
+        console.log('result', result)
+    } catch (err) {
+        console.log('Error getUsers', err)
+        res.redirect('/admin/login')
+    }
+}
+
+restaurantController.updateChosenUser = async (req: Request, res: Response) => {
+    try {
+        console.log('updateChosenUser')
+        const result = await memberService.updateChosenUser(req.body);
+        res.status(HTTPCODES.OK).json({data: result})
+    } catch (err) {
+        console.log('Error updateChosenUser', err)
+        if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standart.code).json(Errors.standart);
     }
 }
 

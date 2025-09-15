@@ -25,8 +25,10 @@ export interface LoginInput{
 }
 
 export interface MemberInput{
+    _id: ObjectId;
     memberType?: MemberType;
     memberStatus?: MemberStatus;
+    memberReservation?: string,
     memberEmail: string;
     memberNick: string;
     memberPhone: string;

@@ -4,6 +4,7 @@ import MemberModel from "../schema/Member.Model";
 import Errors, { MESSAGE, HTTPCODES } from "../libs/Errors";
 import * as bcrypt from "bcryptjs";
 import sendMailer from '../libs/sendMailer/mailer';
+import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 
 
 class MemberService {
@@ -75,8 +76,30 @@ class MemberService {
             console.error('signup error service', err)
             throw new Errors(HTTPCODES.BAD_REQUEST, MESSAGE.CREAT_FAILED);
           }
-
     }
+
+    public async getUsers(): Promise<Member>{
+      const result = await this.memberModel
+        .find({memberType: MemberType.USER})
+        .exec();
+
+        if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND)
+          return result as unknown as Member;  //shu yerda xatop bolsihi mumkin
+    }
+
+    public async updateChosenUser(input: MemberInput): Promise<Member>{
+      const memberId = shapeIntoMongooseObjectId(input._id);
+      const result = await this.memberModel
+       .findByIdAndUpdate({_id: memberId}, input, {new: true})
+       .exec()
+
+       if(!result) throw new Errors(HTTPCODES.NOT_MODIFIED,MESSAGE.UPDATE_FAILED)
+        return result.toObject() as Member;
+    }
+
+    
+
+
 }
 
 
