@@ -3,8 +3,15 @@ import path from "path";
 import routerAdmin from './router-admin';
 import router from './router';
 import cookieParser from 'cookie-parser';
+import { T } from './libs/types/common';
+import session from 'express-session';
+import ConnectMongoDB from "connect-mongodb-session";
 
-
+const MongoDBStore = ConnectMongoDB(session);
+const store = new MongoDBStore({
+    uri: String(process.env.MONGO_URL),
+    collection: "sessions",
+});
 
 //entrance
 const app = express();
@@ -17,6 +24,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //json webToken
+app.use(
+ session({
+     secret: String(process.env.SESSION_SECRET),
+      cookie: { 
+    maxAge: 1000 * 3600 * 6, // 6h
+   },
+   store: store,
+  resave: true,
+  saveUninitialized: true
+ })
+);
+
+app.use( function (req, res, next){
+    const sessionInstance = req.session as T;
+    res.locals.member = sessionInstance.member;
+    next();
+})
 
 
 //views
