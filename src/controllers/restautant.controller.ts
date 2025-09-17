@@ -54,7 +54,10 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
        });
         res.send(result)
     } catch (err) {
-        console.log('Error Process Login', err)
+         console.log( "ERROR  Process login", err);
+        const message = 
+         err instanceof Errors ? err.message : MESSAGE.SOMETHING_WENT_WRONG;
+        res.send(`<script> alert("${message}"); window.location.replace('/admin/login') </script>`);
     }
 } 
 
