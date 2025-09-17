@@ -1,6 +1,8 @@
 import express from 'express';
 const routerAdmin = express.Router();
 import restaurantController from './controllers/restautant.controller';
+import makeUploader from './libs/utils/uploader';
+import productController from './controllers/product.controller';
 
 routerAdmin.get('/', restaurantController.goHome)
 
@@ -29,5 +31,14 @@ routerAdmin
 
  routerAdmin
 .get("/check-me", restaurantController.checkAuthSession);
+
+/** Product */
+
+routerAdmin
+  .post("/product/create", 
+     restaurantController.varifyRestaurant,
+        makeUploader("products").array("productImages", 5),
+     productController.createNewProduct
+    )
 
 export default routerAdmin;

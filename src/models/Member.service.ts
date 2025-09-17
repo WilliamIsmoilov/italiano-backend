@@ -96,7 +96,6 @@ class MemberService {
        if(!result) throw new Errors(HTTPCODES.NOT_MODIFIED,MESSAGE.UPDATE_FAILED)
         return result.toObject() as Member;
     }
-
     
 
 

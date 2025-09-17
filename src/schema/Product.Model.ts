@@ -49,4 +49,6 @@ const productSchema = new Schema ({
 
 },
    { timestamps: true}    //updated_at, created_at
-)
+);
+
+export default mongoose.model('Product', productSchema)

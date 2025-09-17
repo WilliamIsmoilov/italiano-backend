@@ -13,5 +13,12 @@ function getTargetImageStorage(address: any){
             cb(null, random_name)
         }
     } 
-    )
+    );
+};
+
+const makeUploader = (address: string) => {
+    const storage = getTargetImageStorage(address);
+    return multer ({storage: storage})
 }
+
+export default makeUploader;   
