@@ -38,7 +38,13 @@ routerAdmin
   .post("/product/create", 
      restaurantController.varifyRestaurant,
         makeUploader("products").array("productImages", 5),
-     productController.createNewProduct
-    )
+     productController.createNewProduct)
+    
 
+routerAdmin
+.get("/product/all", 
+    restaurantController.varifyRestaurant,
+    productController.getAllProducts
+);
+   
 export default routerAdmin;

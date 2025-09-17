@@ -22,12 +22,29 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
             return ele.path.replace(/\\/g, "/" );
         })
         await productService.createNewProduct(data)
+        res.send(data)
 
     } catch (err) {
         console.log('Error on create product controller', err);
         throw new Errors(HTTPCODES.BAD_REQUEST, MESSAGE.CREAT_FAILED)
     }
 };
+
+
+    productController.getAllProducts = async (req: Request, res: Response) =>{
+        try {
+            console.log('getAllProducts controller');
+            const data =  await productService.getAllProducts();
+            // res.render('products', {products: data})
+            res.send(data)
+        } catch (err) {
+            console.log( "ERROR getAllProducts productController", err); 
+        if(err instanceof Errors) res.status(err.code).json(err);
+         else res.status(Errors.standart.code).json(Errors.standart); 
+        }
+
+    }
+
 
 
 export default productController

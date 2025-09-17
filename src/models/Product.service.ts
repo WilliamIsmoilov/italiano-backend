@@ -22,6 +22,15 @@ class ProductService{
         }
         
     }
+
+    public async getAllProducts(): Promise<Product []> {
+   // string => objectId    
+   const result = await this.productModel
+   .find()
+   .exec();
+   if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
+   return result.map(doc => doc.toObject() as Product);
+  }
 }
 
 export default ProductService;
