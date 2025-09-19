@@ -87,6 +87,17 @@ class MemberService {
           return result as unknown as Member;  //shu yerda xatop bolsihi mumkin
     }
 
+
+    public async getReservation(memberId: string): Promise<Member>{
+      const result = await this.memberModel
+       .find({memberType: MemberType.USER})
+       .populate('memberReservation')
+       .exec();
+
+       if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND)
+        return result as unknown as Member
+    }
+
     public async updateChosenUser(input: MemberInput): Promise<Member>{
       const memberId = shapeIntoMongooseObjectId(input._id);
       const result = await this.memberModel
