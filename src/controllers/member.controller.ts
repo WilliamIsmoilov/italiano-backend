@@ -1,8 +1,8 @@
-import Errors, { HTTPCODES } from '../libs/Errors';
+import Errors, { HTTPCODES, MESSAGE } from '../libs/Errors';
 import { Request, Response, NextFunction } from 'express';
 import {T} from '../libs/types/common';
 import MemberService from '../models/Member.service';
-import { ExtendedRequest, LoginInput, Member, MemberInput } from '../libs/types/member';
+import { ExtendedRequest, LoginInput, Member, MemberInput, MemberUpdateInput } from '../libs/types/member';
 import AuthService from '../models/Auth.service';
 import { AUTH_TIMER } from '../libs/utils/config';
 
@@ -74,6 +74,40 @@ memberController.getMemberDetail = async ( req: ExtendedRequest, res: Response) 
         res.status(HTTPCODES.OK).json(result);
     } catch (err) {
         console.log( "Error  getMemberDetail MemberController", err);
+        if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standart.code).json(Errors.standart);
+    }
+}
+
+memberController.updateMember = async (req: ExtendedRequest, res: Response) => {
+    try {
+        console.log('update member');
+        const input: MemberUpdateInput = req.body;
+        const result = await memberService.updateMember(req.member, input);
+        res.status(HTTPCODES.OK).json(result)
+    } catch (err) {
+        console.log('Error updateMember Controller', err);
+        if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standart.code).json(Errors.standart)
+    }
+}
+
+memberController.varifyAuth =  async (
+    req: ExtendedRequest, 
+    res: Response,
+    next: NextFunction) => {
+    try{
+        const token = req.cookies["accessToken"];
+        if(token) req.member =  await authService.checkAuth(token); 
+            
+        if(!req.member) throw new Errors(
+            HTTPCODES.UNAUTHORIZED, 
+            MESSAGE.NOT_AUTHENTICARTED);
+
+            next();
+
+    } catch(err){
+        console.log( "Error VarifyAuth memberController", err);
         if(err instanceof Errors) res.status(err.code).json(err);
         else res.status(Errors.standart.code).json(Errors.standart);
     }

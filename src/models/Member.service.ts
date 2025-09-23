@@ -1,4 +1,4 @@
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../libs/types/member";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import MemberModel from "../schema/Member.Model";
 import Errors, { MESSAGE, HTTPCODES } from "../libs/Errors";
@@ -152,6 +152,18 @@ public async getMemberDetail(member: Member ): Promise<Member>{
    .exec();
 
    if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
+   return result.toObject() as Member;
+}
+
+public async updateMember(
+  member: Member,
+  input: MemberUpdateInput): Promise<Member>{
+   const memberId = shapeIntoMongooseObjectId(member._id);
+   const result = await this.memberModel
+   .findByIdAndUpdate({_id: memberId}, input, {new: true})
+   .exec();
+
+   if(!result) throw new Errors(HTTPCODES.NOT_MODIFIED, MESSAGE.UPDATE_FAILED);
    return result.toObject() as Member;
 }
 
