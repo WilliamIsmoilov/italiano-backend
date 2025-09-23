@@ -13,7 +13,6 @@ const productController: T = {};
 productController.createNewProduct = async (req: AdminRequest, res: Response) => {
     try {
         console.log('Create Products controller')
-        console.log("req.body:", req.body);
         if(!req.files?.length)
             throw new Errors(HTTPCODES.BAD_REQUEST, MESSAGE.CREAT_FAILED)
 

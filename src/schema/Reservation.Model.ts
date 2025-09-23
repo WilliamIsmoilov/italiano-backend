@@ -1,13 +1,16 @@
-import { Schema } from "mongoose";
+import { Schema, ObjectId } from 'mongoose';
 import mongoose from "mongoose";
 
 const reservationSchema = new Schema({
+    memberId:{
+        type: Schema.Types.ObjectId
+    },
   reservationDate: {
-    type: String,
+    type: Date,
     required: [true, 'Please choose the date']
   },
   reservationTime: {
-    type: String,
+    type: Date,
     required: [true, "Please add time"]
   },
   reservationSize: {
