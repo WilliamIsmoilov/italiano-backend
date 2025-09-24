@@ -1,10 +1,11 @@
-import { Product } from './../libs/types/product';
+import { Product, ProductInquery } from './../libs/types/product';
 import { T } from "../libs/types/common";
 import { NextFunction, Request, Response } from "express";
 import Errors, { HTTPCODES, MESSAGE } from '../libs/Errors';
-import { AdminRequest } from "../libs/types/member";
+import { AdminRequest, ExtendedRequest } from "../libs/types/member";
 import { ProductInput } from "../libs/types/product";
 import ProductService from '../models/Product.service';
+import { ProductCollection } from '../libs/enums/product.enum';
 
 
 const productService = new ProductService()
@@ -37,12 +38,55 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
             // res.render('products', {products: data})
             res.send(data)
         } catch (err) {
-            console.log( "ERROR getAllProducts productController", err); 
-        if(err instanceof Errors) res.status(err.code).json(err);
-         else res.status(Errors.standart.code).json(Errors.standart); 
+          console.log( "ERROR getAllProducts productController", err); 
+          if(err instanceof Errors) res.status(err.code).json(err);
+          else res.status(Errors.standart.code).json(Errors.standart); 
         }
 
     }
+
+    productController.getProducts =async (req: Request, res: Response) => {
+        try{
+        console.log("getProducts");
+        const {page, limit, order, productCollection, search} = req.query;
+        const inquery: ProductInquery = {
+            order: String(order),
+            page: Number(page),
+            limit: Number(limit),
+        };
+
+         if(productCollection) {
+             inquery.productCollection = productCollection as ProductCollection;
+         }
+           
+         if(search){inquery.search = String(search)} 
+            
+         const result = await productService.getProducts(inquery)
+        
+        res.status(HTTPCODES.OK).json(result)
+
+    } catch(err){
+        console.log( "Error getProducts productController", err); 
+        if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standart.code).json(Errors.standart); 
+    }
+    }
+
+
+    productController.getProduct = async(req: ExtendedRequest, res: Response) => {
+   try {
+       console.log('getPorduct')
+       const { id } =  req.params;
+       const memberId = req.member?._id ?? null,
+       result = await productService.getProduct(memberId, id);
+
+       res.status(200).json(result)
+   } catch (err) {
+     console.log('Error, getProduct:', err);
+     if(err instanceof Errors) res.status(err.code).json(err);
+     else res.status(Errors.standart.code).json(Errors.standart)
+   }
+}
 
 
 

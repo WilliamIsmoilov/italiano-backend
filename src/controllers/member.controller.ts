@@ -105,11 +105,26 @@ memberController.varifyAuth =  async (
             MESSAGE.NOT_AUTHENTICARTED);
 
             next();
-
     } catch(err){
         console.log( "Error VarifyAuth memberController", err);
         if(err instanceof Errors) res.status(err.code).json(err);
         else res.status(Errors.standart.code).json(Errors.standart);
+    }
+}
+
+memberController.retrieveAuth =  async (
+    req: ExtendedRequest, 
+    res: Response, 
+    next: NextFunction
+) => {
+    try{
+        const token = req.cookies["accessToken"];
+        if(token) req.member =  await authService.checkAuth(token); 
+        next();
+
+    } catch(err){
+        console.log( "Error retrieveAuth MemberController", err);
+        next();
     }
 }
 

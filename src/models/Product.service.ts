@@ -1,9 +1,13 @@
-import { ProductInput } from "../libs/types/product";
+import { ProductInput, ProductInquery } from "../libs/types/product";
 import ProductModel from "../schema/Product.Model";
 import { Product } from "../libs/types/product";
 import Errors from "../libs/Errors";
 import { HTTPCODES } from "../libs/Errors";
 import { MESSAGE } from "../libs/Errors";
+import { ProductStatus } from "../libs/enums/product.enum";
+import { T } from "../libs/types/common";
+import { shapeIntoMongooseObjectId } from "../libs/utils/config";
+import { ObjectId } from "mongoose";
 
 class ProductService{
     private readonly productModel;
@@ -31,6 +35,40 @@ class ProductService{
    if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
    return result.map(doc => doc.toObject() as Product);
   }
+
+  public async getProducts(inquery: ProductInquery): Promise<Product>{
+     const match: T = {productStatus: ProductStatus.PROCESS}
+      if(inquery.productCollection) 
+        match.productCollection = inquery.productCollection;
+      if(inquery.search){
+        match.productName = {$regex: new RegExp(inquery.search, 'i')};  //searching method uchun regexp degan xossa
+      }
+      const sort : T = inquery.order === 'productPrice'
+       ? {[inquery.order]: 1} 
+       : {[inquery.order]: -1};
+
+       const result = await this.productModel.aggregate([
+          {$match: match},
+          {$sort: sort},
+          {$skip: (inquery.page * 1 -1) * inquery.limit},  //pagination uchun
+          {$limit: inquery.limit * 1},                   //pagination uchun 
+         ])
+         .exec();
+         if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
+
+
+      return result as unknown as Product;
+  }
+
+  public async getProduct(memberId: ObjectId | null, id: string): Promise<Product> {
+       const productId = shapeIntoMongooseObjectId(id);
+       let result = await this.productModel
+            .findOne({_id: productId, productStatus: ProductStatus.PROCESS})
+            .exec();
+       if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
+
+      return result as unknown as Product;
+    }
 }
 
 export default ProductService;

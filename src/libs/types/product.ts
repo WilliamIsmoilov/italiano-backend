@@ -29,3 +29,12 @@ export interface Product {
     createdAt: Date;
     updatedAt: Date;
 }
+
+
+export interface ProductInquery{
+    order: string;
+    page: number;
+    limit: number;
+    productCollection?: ProductCollection;
+    search?: string;
+}
