@@ -1,4 +1,4 @@
-import { ProductInput, ProductInquery } from "../libs/types/product";
+import { ProductInput, ProductInquery, ProductUpdateInput } from "../libs/types/product";
 import ProductModel from "../schema/Product.Model";
 import { Product } from "../libs/types/product";
 import Errors from "../libs/Errors";
@@ -68,6 +68,15 @@ class ProductService{
        if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
 
       return result as unknown as Product;
+    }
+
+    public async updateChosenProduct(id: string, input: ProductUpdateInput): Promise<Product>{
+        id = shapeIntoMongooseObjectId(id);
+        const result = await this.productModel
+        .findByIdAndUpdate({_id: id}, input, {new: true})
+        .exec();
+        if(!result) throw new Errors(HTTPCODES.NOT_MODIFIED, MESSAGE.UPDATE_FAILED)
+            return result.toObject() as Product;
     }
 }
 

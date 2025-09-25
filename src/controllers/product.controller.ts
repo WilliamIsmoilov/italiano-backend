@@ -30,6 +30,19 @@ productController.createNewProduct = async (req: AdminRequest, res: Response) =>
     }
 };
 
+productController.updateChosenProducts = async (req: Request, res: Response) => {
+    try {
+        console.log('update chosen products');
+        const id = req.params.id;
+        const result = await productService.updateChosenProduct(id, req.body);
+        res.status(HTTPCODES.OK)
+    } catch (err) {
+        console.log('Error updateChosenProduct controller', err);
+        if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standart.code).json(Errors.standart);
+    }
+}
+
 
     productController.getAllProducts = async (req: Request, res: Response) =>{
         try {
