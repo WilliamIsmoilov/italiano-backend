@@ -52,7 +52,6 @@ restaurantController.processLogin = async (req: AdminRequest, res: Response) => 
        req.session.save( function () {
          res.redirect("/admin/product/all");
        });
-        res.send(result)
     } catch (err) {
          console.log( "ERROR  Process login", err);
         const message = 

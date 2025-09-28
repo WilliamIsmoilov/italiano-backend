@@ -35,7 +35,7 @@ productController.updateChosenProducts = async (req: Request, res: Response) => 
         console.log('update chosen products');
         const id = req.params.id;
         const result = await productService.updateChosenProduct(id, req.body);
-        res.status(HTTPCODES.OK)
+        res.status(HTTPCODES.OK).json({data: result})
     } catch (err) {
         console.log('Error updateChosenProduct controller', err);
         if(err instanceof Errors) res.status(err.code).json(err);
@@ -102,5 +102,4 @@ productController.updateChosenProducts = async (req: Request, res: Response) => 
 }
 
 
-
-export default productController
+export default productController;
