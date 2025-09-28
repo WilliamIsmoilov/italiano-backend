@@ -17,4 +17,4 @@ const  OrderItemSchema = new Schema({
 }, {timestamps: true, collection: 'orderItems'}
 );
 
-export default mongoose.model('OrderItem', OrderItemSchema)
+export default mongoose.model('OrderModal', OrderItemSchema)
