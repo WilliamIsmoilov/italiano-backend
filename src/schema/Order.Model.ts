@@ -1,20 +1,26 @@
-import { OrderMethod, PaymentMethod } from '../libs/enums/order.enum';
+import { OrderMethod, OrderStatus, PaymentMethod } from '../libs/enums/order.enum';
 import {Product} from '../libs/types/product';
 import mongoose, {Schema} from 'mongoose'
 import { Order } from '../libs/types/order';
 
 const  OrderItemSchema = new Schema({
-    itemPrice: {
+    orderTotal: {
         type: Number,
         required: true
     },
-    orderId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Order'
+    orderDelivery: {
+        type: Number,
+        required: true
     },
-    productId: {
+    orderStatus:{
+        type: String,
+        enum:OrderStatus,
+        default: OrderStatus.PAUSE
+    },
+    memberId: {
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+        required: true,
+        ref: 'Member'
     },
     memberNick: {
         type: String,

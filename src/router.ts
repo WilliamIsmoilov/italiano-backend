@@ -8,7 +8,9 @@ import orderController from './controllers/order.controller';
 router.post('/member/signup', memberController.signup);
 router.post('/member/login', memberController.login);
 router.post('/member/logout',memberController.varifyAuth, memberController.logout);
-router.post('/member/update', memberController.varifyAuth, memberController.updateMember)
+router.post('/member/update', memberController.varifyAuth, memberController.updateMember);
+router.post('/order/create', memberController.varifyAuth, orderController.createOrder)
+
 
 
 //get

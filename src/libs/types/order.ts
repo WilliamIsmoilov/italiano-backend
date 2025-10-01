@@ -9,7 +9,7 @@ export interface OrderItemInput {
     orderId? : ObjectId;
 }
 
-export interface Order{
+export interface  Order{
     _id: ObjectId;
     orderTotal: number;
     orderDelivery: number;
