@@ -1,5 +1,5 @@
 import { ObjectId } from "mongoose";
-import { OrderStatus } from "../enums/order.enum";
+import { OrderMethod, OrderStatus, PaymentMethod } from "../enums/order.enum";
 import { Product } from "./product";
 
 export interface OrderItemInput {
@@ -30,5 +30,19 @@ export interface OrderItem {
     productId: ObjectId;
     createdAt: Date;
     updatedAt: Date;
+}
+export interface CustomerInput{
+    memberNick: string,
+    memberPhone: string,
+    memberAddress: string,
+    memberEmail: string,
+    payment: PaymentMethod,
+    orderMethod: OrderMethod,
+    notes?: string
 
+};
+
+export interface FullOrder{
+  items: OrderItemInput[];
+  customer: CustomerInput;
 }

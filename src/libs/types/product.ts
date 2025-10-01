@@ -25,7 +25,6 @@ export interface Product {
     productVolume?: number;
     productDesc?: string[];
     productImages: string[];
-    productViews?: number;
     createdAt: Date;
     updatedAt: Date;
 }

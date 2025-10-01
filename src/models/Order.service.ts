@@ -1,4 +1,4 @@
-import { Order, OrderItemInput } from "../libs/types/order";
+import { FullOrder, Order, OrderItemInput } from "../libs/types/order";
 import { Member } from "../libs/types/member";
 import OrderModel from "../schema/Order.Model"
 import OrderItem from "../schema/OrderItem.Model";
@@ -17,9 +17,9 @@ class OrderService {
         this.orderItemModel = OrderItem;
     }
 
-    public async createOrder(member: Member, input: OrderItemInput[]): Promise<Order>{
+    public async createOrder(member: Member, input: FullOrder): Promise<Order>{
         const memberId = shapeIntoMongooseObjectId(member._id);
-        const amount = input.reduce((accumulator: number, item: OrderItemInput)=> {
+        const amount = input.items.reduce((accumulator: number, item: OrderItemInput)=> {
             return accumulator + item.itemPrice * item.itemQuantity
         }, 0)
         const delivery = amount < 100 ? 5 : 0;
@@ -29,12 +29,21 @@ class OrderService {
             const newOrder: Order = await this.orderModel.create({
                 orderTotal: amount + delivery,
                 orderDelivery: delivery,
-                memberId: memberId
+                memberId: memberId,
+
+                memberNick: input.customer.memberNick,
+                memberPhone: input.customer.memberPhone,
+                memberEmail: input.customer.memberEmail,
+                memberAddress: input.customer.memberAddress,
+                orderMethod: input.customer.orderMethod,
+                payment: input.customer.payment,
+                notes: input.customer.notes
+
             }) as unknown as Order
 
             const orderId = newOrder._id;
             console.log('OrderId:', orderId);
-            await this.recordOrderItem(orderId, input)
+            await this.recordOrderItem(orderId, input.items)
             return newOrder
         } catch (err) {
             console.log('Error, model: createOrder', err)
