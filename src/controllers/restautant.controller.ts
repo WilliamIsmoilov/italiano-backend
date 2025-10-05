@@ -1,11 +1,13 @@
-import { AdminRequest, LoginInput,  MemberInput } from '../libs/types/member';
+import { AdminRequest, ExtendedRequest, LoginInput,  MemberInput } from '../libs/types/member';
 import { T } from "../libs/types/common";
 import MemberService from "../models/Member.service";
 import { NextFunction, Request, Response } from "express";
 import Errors, { HTTPCODES, MESSAGE } from '../libs/Errors';
 import { MemberType } from '../libs/enums/member.enum';
+import OrderService from '../models/Order.service';
 
 const memberService = new MemberService();
+const orderService = new OrderService()
 
 const restaurantController:  T = {};
 

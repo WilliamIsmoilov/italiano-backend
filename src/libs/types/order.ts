@@ -46,3 +46,20 @@ export interface FullOrder{
   items: OrderItemInput[];
   customer: CustomerInput;
 }
+
+export interface orderUpdateInput {
+    orderId:string;
+    updatedItems?: {
+        itemId: string;
+        newQuantity?: number;
+        newPrice?: number;
+    }[];
+    newItems?: {
+        productId: string;
+        itemQuantity: number;
+        itemPrice: number;
+    }[];
+    removedItemIds?: string[];
+
+    
+}

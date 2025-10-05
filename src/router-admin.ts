@@ -3,6 +3,8 @@ const routerAdmin = express.Router();
 import restaurantController from './controllers/restautant.controller';
 import makeUploader from './libs/utils/uploader';
 import productController from './controllers/product.controller';
+import router from './router';
+import orderController from './controllers/order.controller';
 
 routerAdmin.get('/', restaurantController.goHome)
 
@@ -28,6 +30,11 @@ routerAdmin
     restaurantController.varifyRestaurant,
     restaurantController.updateChosenUser
  );
+
+ routerAdmin
+  .get('/getOrders',
+    restaurantController.varifyRestaurant,
+    orderController.getOrders);
 
  routerAdmin
 .get("/check-me", restaurantController.checkAuthSession);
