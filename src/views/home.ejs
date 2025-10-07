@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/home.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITALIANO</title>
+    <title>Italiano</title>
+    <link rel="icon" type="image/png" href="/img/pizza.png" />
 </head>
 <body>
     <div id="app">
@@ -13,25 +14,27 @@
     <h2>Restaurant</h2>
   </div>
   <div class="buttons">
-    <button>
-        <a class="nav-link active" href="/admin">Home</a>
-    </button>
     <button type="button" id="colors-btn">
-      Random colors
+        <span>Random colors</span>
+      
     </button>
     <% if(!member) { %>
+         <button>
+           <a class="nav-link active" href="/admin"><span>Home</span></a>
+         </button>
         <button>
-            <a class="nav-link" href="/admin/signup">Signup</a>
+            <a class="nav-link" href="/admin/signup"><span>Signup</span></a>
+            <div class="button-shadow"></div>
         </button>
         <button>
-             <a class="nav-link" href="/admin/login">Login</a>
+             <a class="nav-link" href="/admin/login"><span>Login</span></a>
         </button>
         <% } else { %>
             <button>
-                <a class="nav-link" href="/admin/product/all">Menu</a>
+                <a class="nav-link" href="/admin/product/all"><span>Menu</span></a>
             </button>
             <button>
-                <a class="nav-link" href="/admin/user/all">Users</a>
+                <a class="nav-link" href="/admin/user/all"><span>Users</span></a>
             </button>
             <button  style="cursor: pointer;"
             onclick="return confirm('Do you want to logout?')">

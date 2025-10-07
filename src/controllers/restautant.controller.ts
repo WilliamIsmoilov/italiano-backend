@@ -24,7 +24,7 @@ restaurantController.goHome = async (req: Request, res: Response) => {
 restaurantController.getSignup = (req: Request, res: Response) =>{
     try {
         console.log( "go signup");
-        res.send("<h1> Get SignUp</h1>");
+        res.render('signup');
     } catch(err){
         console.log( "ERROR signup", err)
         res.redirect('/admin')
@@ -35,7 +35,7 @@ restaurantController.getSignup = (req: Request, res: Response) =>{
 restaurantController.getLogin = (req: Request, res: Response) => {
     try {
         console.log('go login')
-        res.send('login')
+        res.render('login')
     } catch (err) {
         console.log('Error login', err);
         res.redirect('/admin')
@@ -74,12 +74,11 @@ restaurantController.processSignup = async ( req: AdminRequest, res: Response) =
         req.session.save( function () {
         res.redirect("/admin/product/all");
            });
-        res.send(result);
     } catch (err) {
-        console.log( "ERROR  Process SignUp", err);
+        console.log( "ERROR  Process login", err);
         const message = 
-        err instanceof Errors ? err.message : MESSAGE.SOMETHING_WENT_WRONG;
-        res.send(`<script> alert("${message}"); window.location.replace('/admin/signup') </script>`);
+         err instanceof Errors ? err.message : MESSAGE.SOMETHING_WENT_WRONG;
+        res.send(`<script> alert("${message}"); window.location.replace('/admin') </script>`);
     }
 }
 

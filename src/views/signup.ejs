@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/signup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italiano</title>
+    <link rel="icon" type="image/png" href="/img/pizza.png" />
+    <script defer src="/js/signup.js"></script>
+</head>
+<body>
+   <div class="main">
+  <div class="form-wrapper">
+    <h2>Signup Form</h2>
+    <form onsubmit="return validateSignUpForm()" action="/admin/signup" method="POST" enctype="application/x-www-form-urlencoded">
+     <div class="input-wrapper">
+        <input 
+              class=" member-nick" 
+              type="text" 
+              name="memberNick" 
+              value=""/>
+        <label>Username</label>
+      </div>
+      <div class="input-wrapper width-50">
+        <input 
+              class=" member-email" 
+              type="email" 
+              name="memberEmail" 
+              value="" />
+        <label>Email</label>
+      </div>
+      <div class="input-wrapper width-50">
+        <input 
+              class=" member-phone" 
+              type="number" 
+              name="memberPhone"
+              value=""
+               />
+        <label>Contact Number</label>
+      </div>
+      <div class="input-wrapper">
+        <input 
+               class=" member-address"  
+               name="memberAddress"
+               value=""
+                />
+        <label>Address</label>
+      </div>
+      <div class="input-wrapper">
+        <input 
+               class=" member-password" 
+               type="password" 
+               name="memberPassword"
+               value=""  />
+        <label>Password</label>
+      </div>
+      <div class="input-wrapper">
+        <input 
+               class="confirm-password" 
+               type="password" 
+               id="confirmPassword"
+               class="confirm-password" 
+               
+                />
+        <label>Confirm Password</label>
+      </div>
+      <button class="btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+       Signup
+      </button>
+    </form>
+  </div>
+</div> 
+</body>
+</html>
