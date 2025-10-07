@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITALIANO</title>
+</head>
+<body>
+    <div id="app">
+  <div class="hero">
+    <h1 style="font-style:normal; font-family: 'Poppins', sans-serif;">ITALIANO</h1>
+    <h2>Restaurant</h2>
+  </div>
+  <div class="buttons">
+    <button>
+        <a class="nav-link active" href="/admin">Home</a>
+    </button>
+    <button type="button" id="colors-btn">
+      Random colors
+    </button>
+    <% if(!member) { %>
+        <button>
+            <a class="nav-link" href="/admin/signup">Signup</a>
+        </button>
+        <button>
+             <a class="nav-link" href="/admin/login">Login</a>
+        </button>
+        <% } else { %>
+            <button>
+                <a class="nav-link" href="/admin/product/all">Menu</a>
+            </button>
+            <button>
+                <a class="nav-link" href="/admin/user/all">Users</a>
+            </button>
+            <button  style="cursor: pointer;"
+            onclick="return confirm('Do you want to logout?')">
+               <a class="nav-link" href="/admin/logout">Logout</a>
+            </button>
+            <% } %>
+
+    
+  </div>
+  <canvas id="webgl-canvas"></canvas>
+</div>
+<script type="module" src="/js/home.js"></script>
+</body>
+</html>
+

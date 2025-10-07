@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import path from "path";
 import routerAdmin from './router-admin';
 import router from './router';
@@ -50,6 +50,15 @@ app.set('view engine', 'ejs');
 //routes
 app.use('/',  router)             // react    SPA
 app.use('/admin', routerAdmin)  //ejs/ssr   SSR
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: data:;"
+  );
+  next();
+});
+
 
 
 

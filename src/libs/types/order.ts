@@ -59,7 +59,11 @@ export interface orderUpdateInput {
         itemQuantity: number;
         itemPrice: number;
     }[];
-    removedItemIds?: string[];
+    removedItemIds?: string[];    
+}
 
-    
+export interface OrderInquery{
+    page: number;
+    limit: number;
+    orderStatus: OrderStatus;
 }

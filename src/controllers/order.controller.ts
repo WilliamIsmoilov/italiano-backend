@@ -3,7 +3,8 @@ import { NextFunction, Request, Response } from "express";
 import Errors, { HTTPCODES, MESSAGE } from '../libs/Errors';
 import OrderService from "../models/Order.service";
 import { ExtendedRequest } from "../libs/types/member";
-import { orderUpdateInput } from "../libs/types/order";
+import { OrderInquery, orderUpdateInput, Order } from '../libs/types/order';
+import { OrderStatus } from "../libs/enums/order.enum";
 
 
 
@@ -46,6 +47,25 @@ orderController.updateOrder = async( req: ExtendedRequest, res: Response) => {
         console.log('Error updateOrder', err);
         if(err instanceof Errors) res.status(err.code).json(err);
         else res.status(Errors.standart.code).json(Errors.standart)
+    }
+}
+
+orderController.getMyOrders = async (req: ExtendedRequest, res: Response) => {
+    try {
+        console.log('getMyOrders');
+        const {page, limit, orderStatus} = req.query;
+        const inquery: OrderInquery ={
+            page: Number(page),
+            limit: Number(limit) ,
+            orderStatus: orderStatus as OrderStatus
+        };
+        console.log('inquery:', inquery);
+        const result = await orderService.getMyOrders(req.member, inquery)
+        res.status(200).json(result)
+    } catch (err) {
+        console.log("error on getMyOrders controller:", err);
+        if(err instanceof Errors) res.status(err.code).json(err);
+        else res.status(Errors.standart.code).json(Errors.standart);
     }
 }
 export default orderController;

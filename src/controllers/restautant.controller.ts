@@ -14,7 +14,7 @@ const restaurantController:  T = {};
 restaurantController.goHome = async (req: Request, res: Response) => {
     try {
         console.log('go home')
-        res.send('<h1>Go Home   </h1>')
+        res.render('home')
     } catch (err) {
         console.log('Go home restaurant controller', err)
         

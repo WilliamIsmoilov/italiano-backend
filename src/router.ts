@@ -14,12 +14,14 @@ router.post('/order/update', memberController.varifyAuth, orderController.update
 
 
 
+
 //get
 router.get('/member/restaurant', memberController.getRestaurant);
 router.get('/member/detail',memberController.varifyAuth, memberController.getMemberDetail)
 router.get('/product/all', productController.getProducts);
 router.get('/product/:id', productController.getProduct);
-router.post('order/create', memberController.varifyAuth, orderController.createOrder)
+router.get('/order/all', memberController.varifyAuth, orderController.getMyOrders)
+
    
     
 
