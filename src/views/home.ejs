@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,4 +49,394 @@
 <script type="module" src="/js/home.js"></script>
 </body>
 </html>
+ -->
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/home.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Italiano</title>
+    <link rel="icon" type="image/png" href="/img/pizza.png" />
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer type="module" src="/js/home.js"></script>
+</head>
+<body>
+   <div class="sidebar">
+            <div class="sidebar-brand">
+                <h2><span><i class="fab fa-accusoft"></i></span><span id="kleenpulse">Italiano</span></h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="/admin" class="active"><span class="fas fa-cubes"></span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/user/all"><span class="fas fa-users"></span>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/product/all"><span class="fas fa-clipboard-list"></span>
+                            <span>Products</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/getOrders"><span class="fas fa-shopping-bag"></span>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/signup"><span class="fas fa-receipt"></span>
+                            <span>Signup</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/login"><span class="fa fa-user-circle"></span>
+                            <span>login</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/"><span class="fas fa-clipboard"></span>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    <div class="main-wrapper">
+    <div class="main-content">
+            <header>
+                <h2 class="heading" id="dashboard">
+                    Dashboard
+                    </h2>
+                    <label for="nav-toggle">
+                        <span class="fas fa-bars"></span>
+                    </label>
+                  
+                <div class="search">
+                    <div class="search-rotate">
+                    <div class="icon"></div>
+                    </div>
+                    <div class="input">
+                        <input type="text" placeholder="search" id="mysearch" autocomplete="off" onkeydown="display(this)">
+                       
+                    </div>
+                    
+                </div>
+               
+
+
+
+                <div class="user-wrapper">
+                    <img style="width: 60px; height: 60px;"  src="/img/pizza.png"
+                        alt="">
+                    <div>
+                        <h4>Italiano</h4>
+                        <b>C E O</b></small>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div id="pop-wrap">
+                    <h1 class="pop-up">Light Mode Activated</h1>
+                </div>
+                <div class="switch" id="switch">
+                    <div id="toggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <i class="indicator"></i>
+    
+                    </div>
+                </div>
+                <div class="cards">
+                    <div class="card-single">
+                        <div>
+                            <h1 id="customer"></h1>
+                            <span>Happy Clients</span>
+                        </div>
+                        <div>
+                            <span class="fas fa-users"></span>
+                        </div>
+                    </div>
+                    <div class="card-single">
+                        <div>
+                            <h1 id="project"></h1>
+                            <span>Meals Prepared!</span>
+                        </div>
+                        <div>
+                            <span class="fas fa-clipboard"></span>
+                        </div>
+                    </div>
+                    <div class="card-single">
+                        <div>
+                            <h1 id="order"></h1>
+                            <span>Confirmed Orders</span>
+                        </div>
+                        <div>
+                            <span class="fas fa-shopping-bag"></span>
+                        </div>
+                    </div>
+                    <div class="card-single">
+                        <div>
+                            <h1><sup>$</sup>
+                                <p id="income"><b>k</b></p>
+                            </h1>
+                            <span>yearly Income</span>
+                        </div>
+                        <div>
+                            <span class="fab fa-google-wallet"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-grid">
+  <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="heading">Recently added products</h3>
+                                <button>See all <span class="fas fa-arrow-right"></span></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>Products</td>
+                                                <td>Product type</td>
+                                                <td>Status</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>UI/UX Design</td>
+                                                <td>UI Team</td>
+                                                <td>
+                                                    <span class="status purple"></span>review
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Web Dev</td>
+                                                <td>Frontend</td>
+                                                <td>
+                                                    <span class="status pink"></span>pending
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ushop App</td>
+                                                <td>Mobile Team</td>
+                                                <td>
+                                                    <span class="status orange"></span>active
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>UI/UX Design</td>
+                                                <td>UI Team</td>
+                                                <td>
+                                                    <span class="status purple"></span>review
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Web Dev</td>
+                                                <td>Frontend</td>
+                                                <td>
+                                                    <span class="status pink"></span>pending
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ushop App</td>
+                                                <td>Mobile Team</td>
+                                                <td>
+                                                    <span class="status orange"></span>active
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>UI/UX Design</td>
+                                                <td>UI Team</td>
+                                                <td>
+                                                    <span class="status purple"></span>review
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Web Dev</td>
+                                                <td>Frontend</td>
+                                                <td>
+                                                    <span class="status pink"></span>pending
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ushop App</td>
+                                                <td>Mobile Team</td>
+                                                <td>
+                                                    <span class="status orange"></span>active
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>UI/UX Design</td>
+                                                <td>UI Team</td>
+                                                <td>
+                                                    <span class="status purple"></span>review
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Web Dev</td>
+                                                <td>Frontend</td>
+                                                <td>
+                                                    <span class="status pink"></span>pending
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ushop App</td>
+                                                <td>Mobile Team</td>
+                                                <td>
+                                                    <span class="status orange"></span>active
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+                    <div class="customers">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="heading">New customer</h3>
+                                <button>Sell all<span class="fas fa-arrow-right"></span></button>
+                            </div>
+    
+                            <div class="card-body">
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>
+                                                lion Emusky</h4>
+                                            <small>CEO @ TLS</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                        <span class="fas fa-user-circle"></span>
+                                        <span class="fas fa-comment"></span>
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>Ion Emusky</h4>
+                                            <small>C0O @ AFK</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                    <span class="fas fa-user-circle"></span>
+                                    <span class="fas fa-comment"></span>
+                                    <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>El-lion musky</h4>
+                                            <small>CEO @ FOMO</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                    <span class="fas fa-user-circle"></span>
+                                    <span class="fas fa-comment"></span>
+                                    <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>John Bezos</h4>
+                                            <small>CEO @ Mazon</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                        <span class="fas fa-user-circle"></span>
+                                        <span class="fas fa-comment"></span>
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>Beelz Gai8</h4>
+                                            <small>CEO @ Mycroft</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                        <span class="fas fa-user-circle"></span>
+                                        <span class="fas fa-comment"></span>
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>Jeam Krook</h4>
+                                            <small>CEO @ Penapple</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                        <span class="fas fa-user-circle"></span>
+                                        <span class="fas fa-comment"></span>
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="customer">
+                                    <div class="info">
+                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                            alt="">
+                                        <div>
+                                            <h4>Cris Coya</h4>
+                                            <small>CEO @ PenCode</small>
+                                        </div>
+                                    </div>
+                                    <div class="contact">
+                                        <span class="fas fa-user-circle"></span>
+                                        <span class="fas fa-comment"></span>
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </main>
+            <div class="footer">
+        <div class="word">
+    
+            <p>Since <span id="hrt"><i class="far fa-heart"></i></span> | Italiano 2022 - <span id="full-year"></span></p>
+        </div>
+    </div>
+    </div>
+    </div>
+    <video class="video-1" src="https://vxrcel-studio.vercel.app/abstract.mp4" loop muted autoplay></video>
+    <video class="video-2" src="https://vxrcel-studio.vercel.app/darkwave.mp4" loop muted autoplay></video>
+</body>
+</html>

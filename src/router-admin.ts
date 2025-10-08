@@ -26,7 +26,7 @@ routerAdmin
     restaurantController.getUsers);
 
 routerAdmin
- .post('/updateChosenUser',
+ .post('/user/edit',
     restaurantController.varifyRestaurant,
     restaurantController.updateChosenUser
  );

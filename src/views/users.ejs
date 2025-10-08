@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/users.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Italiano</title>
+    <link rel="icon" type="image/png" href="/img/pizza.png" />
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer type="text/javascript" src="/js/users.js"></script>
+</head>
+<body>
+   <div class="sidebar">
+            <div class="sidebar-brand">
+                <h2><span><i class="fab fa-accusoft"></i></span><span id="kleenpulse">Italiano</span></h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="/admin" class="active"><span class="fas fa-cubes"></span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/user/all"><span class="fas fa-users"></span>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/product/all"><span class="fas fa-clipboard-list"></span>
+                            <span>Products</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/getOrders"><span class="fas fa-shopping-bag"></span>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/signup"><span class="fas fa-receipt"></span>
+                            <span>Signup</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/login"><span class="fa fa-user-circle"></span>
+                            <span>login</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/"><span class="fas fa-clipboard"></span>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    <div class="main-wrapper">
+    <div class="main-content">
+            <header>
+                <h2 class="heading" id="dashboard">
+                    Dashboard
+                    </h2>
+                    <label for="nav-toggle">
+                        <span class="fas fa-bars"></span>
+                    </label>
+                  
+                <div class="search">
+                    <div class="search-rotate">
+                    <div class="icon"></div>
+                    </div>
+                    <div class="input">
+                        <input type="text" placeholder="search" id="mysearch" autocomplete="off" onkeydown="display(this)">
+                       
+                    </div>
+                    
+                </div>
+               
+
+
+
+                <div class="user-wrapper">
+                    <img style="width: 60px; height: 60px;"  src="/img/pizza.png"
+                        alt="">
+                    <div>
+                        <h4>Italiano</h4>
+                        <b>C E O</b></small>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div id="pop-wrap">
+                    <h1 class="pop-up">Light Mode Activated</h1>
+                </div>
+                <div class="switch" id="switch">
+                    <div id="toggle">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <i class="indicator"></i>
+    
+                    </div>
+                </div>
+
+                <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="heading">Recently added products</h3>
+                                <button>See all <span class="fas fa-arrow-right"></span></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td scope="col">No</td>
+                                                <td scope="col">Name</td>
+                                                <td scope="col">Email</td>
+                                                <td scope="col"> Phone</td>
+                                                <td scope="col">Status</td>
+                                            </tr>
+                                        </thead>
+                                        <% users.map(function(value, index){ %>
+                                            <tbody>
+                                                <td><%= index+1 %></td>
+                                                <td><%= value.memberNick %></td>
+                                                <td><%= value.memberEmail %></td>
+                                                <td><%= value.memberPhone %></td>
+                                                <td>
+                                                    <select class=" member-status" id="<%= value._id %>" style="color: white; background-color: rgba(85, 83, 83, 0); border-radius: 9px;">
+                                                        <option value="ACTIVE" <%= value.memberStatus === 'ACTIVE' ? 'selected': '' %> >ACTIVE</option>
+                                                        <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected': '' %>>BLOCK</option>
+                                                        <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected': '' %>>DELETE</option>
+                                                    </select>
+                                                </td>
+                                            </tbody>
+                                         <%}) %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+                 </main>
+            <div class="footer">
+        <div class="word">
+    
+            <p>Since <span id="hrt"><i class="far fa-heart"></i></span> | Italiano 2022 - <span id="full-year"></span></p>
+        </div>
+    </div>
+    </div>
+    </div>
+    <video class="video-1" src="https://vxrcel-studio.vercel.app/abstract.mp4" loop muted autoplay></video>
+    <video class="video-2" src="https://vxrcel-studio.vercel.app/darkwave.mp4" loop muted autoplay></video>
+</body>
+</html>

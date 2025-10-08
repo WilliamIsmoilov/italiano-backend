@@ -370,9 +370,10 @@ body {
 .video-2 {
   z-index: -999;
   position: fixed;
-  width: fit-content;
+  width: 100vw;
   height: 100%;
   top: 0;
+  object-fit: cover;
 }
 
 .video-2 {
@@ -1009,7 +1010,7 @@ body.light .heading {
   transition: all 400ms;
 }
 .cards .card-single {
-  height: 150px;
+  height: 100px;
 }
 .card-single:hover {
   transform: scale(1.04);
@@ -1053,7 +1054,7 @@ body.light .heading {
 .recent-grid {
   margin-top: 3.5rem;
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: 1rem;
   grid-template-columns: 65% auto;
 }
 
