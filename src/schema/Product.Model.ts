@@ -21,6 +21,16 @@ const productSchema = new Schema ({
     enum: ProductCollection,
     required: true,
 },
+    productSize: {
+        type: String,
+        enum: ProductSize,
+        default: ProductSize.NORMAL,
+},
+    productVolume: {
+    type: Number,
+    enum: ProductVolume,
+    default: ProductVolume.ONE,
+   },
 
    productPrice: {
     type: Number,
@@ -40,11 +50,6 @@ const productSchema = new Schema ({
     productImages: {
         type: [String],
         default: [],
-    },
-
-    productViews: {
-        type: Number,
-        default: 0,
     },
 
 },

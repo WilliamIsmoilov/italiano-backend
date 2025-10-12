@@ -5,8 +5,10 @@ import { NextFunction, Request, Response } from "express";
 import Errors, { HTTPCODES, MESSAGE } from '../libs/Errors';
 import { MemberType } from '../libs/enums/member.enum';
 import OrderService from '../models/Order.service';
+import ProductService from '../models/Product.service';
 
 const memberService = new MemberService();
+const productService = new ProductService()
 const orderService = new OrderService()
 
 const restaurantController:  T = {};
@@ -14,7 +16,9 @@ const restaurantController:  T = {};
 restaurantController.goHome = async (req: Request, res: Response) => {
     try {
         console.log('go home')
-        res.render('home')
+        const members = await memberService.getUsers();
+        const products = await productService.getAllProducts();
+        res.render('home', {members, products})
     } catch (err) {
         console.log('Go home restaurant controller', err)
         

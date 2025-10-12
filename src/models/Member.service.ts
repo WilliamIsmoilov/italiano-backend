@@ -5,6 +5,7 @@ import Errors, { MESSAGE, HTTPCODES } from "../libs/Errors";
 import * as bcryptjs from "bcryptjs";
 import sendMailer from '../libs/sendMailer/mailer';
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
+import { create } from "domain";
 
 
 class MemberService {
@@ -81,6 +82,7 @@ class MemberService {
     public async getUsers(): Promise<Member>{
       const result = await this.memberModel
         .find({memberType: MemberType.USER})
+        .sort({createdAt: -1})
         .exec();
 
         if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND)

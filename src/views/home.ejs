@@ -1,57 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/home.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Italiano</title>
-    <link rel="icon" type="image/png" href="/img/pizza.png" />
-</head>
-<body>
-    <div id="app">
-  <div class="hero">
-    <h1 style="font-style:normal; font-family: 'Poppins', sans-serif;">ITALIANO</h1>
-    <h2>Restaurant</h2>
-  </div>
-  <div class="buttons">
-    <button type="button" id="colors-btn">
-        <span>Random colors</span>
-      
-    </button>
-    <% if(!member) { %>
-         <button>
-           <a class="nav-link active" href="/admin"><span>Home</span></a>
-         </button>
-        <button>
-            <a class="nav-link" href="/admin/signup"><span>Signup</span></a>
-            <div class="button-shadow"></div>
-        </button>
-        <button>
-             <a class="nav-link" href="/admin/login"><span>Login</span></a>
-        </button>
-        <% } else { %>
-            <button>
-                <a class="nav-link" href="/admin/product/all"><span>Menu</span></a>
-            </button>
-            <button>
-                <a class="nav-link" href="/admin/user/all"><span>Users</span></a>
-            </button>
-            <button  style="cursor: pointer;"
-            onclick="return confirm('Do you want to logout?')">
-               <a class="nav-link" href="/admin/logout">Logout</a>
-            </button>
-            <% } %>
-
-    
-  </div>
-  <canvas id="webgl-canvas"></canvas>
-</div>
-<script type="module" src="/js/home.js"></script>
-</body>
-</html>
- -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,125 +144,52 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="heading">Recently added products</h3>
-                                <button>See all <span class="fas fa-arrow-right"></span></button>
+                                <button onclick="window.location.href='/admin/product/all'"> See all <span class="fas fa-arrow-right"></span></button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table width="100%">
                                         <thead>
                                             <tr>
-                                                <td>Products</td>
-                                                <td>Product type</td>
-                                                <td>Status</td>
+                                                <td scope="col">Products</td>
+                                                <td scope="col" >Product type</td>
+                                                <td scope="col">Status</td>
                                             </tr>
                                         </thead>
+                                        <% products.slice(0,12).map(function(value){ %>
                                         <tbody>
                                             <tr>
-                                                <td>UI/UX Design</td>
-                                                <td>UI Team</td>
+                                                <td><%= value.productName %></td>
+                                                <td><%= value.productCollection %></td>
                                                 <td>
-                                                    <span class="status purple"></span>review
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Web Dev</td>
-                                                <td>Frontend</td>
-                                                <td>
-                                                    <span class="status pink"></span>pending
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ushop App</td>
-                                                <td>Mobile Team</td>
-                                                <td>
-                                                    <span class="status orange"></span>active
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UI/UX Design</td>
-                                                <td>UI Team</td>
-                                                <td>
-                                                    <span class="status purple"></span>review
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Web Dev</td>
-                                                <td>Frontend</td>
-                                                <td>
-                                                    <span class="status pink"></span>pending
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ushop App</td>
-                                                <td>Mobile Team</td>
-                                                <td>
-                                                    <span class="status orange"></span>active
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UI/UX Design</td>
-                                                <td>UI Team</td>
-                                                <td>
-                                                    <span class="status purple"></span>review
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Web Dev</td>
-                                                <td>Frontend</td>
-                                                <td>
-                                                    <span class="status pink"></span>pending
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ushop App</td>
-                                                <td>Mobile Team</td>
-                                                <td>
-                                                    <span class="status orange"></span>active
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UI/UX Design</td>
-                                                <td>UI Team</td>
-                                                <td>
-                                                    <span class="status purple"></span>review
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Web Dev</td>
-                                                <td>Frontend</td>
-                                                <td>
-                                                    <span class="status pink"></span>pending
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ushop App</td>
-                                                <td>Mobile Team</td>
-                                                <td>
-                                                    <span class="status orange"></span>active
+                                                    <span class="status purple"></span><%= value.productStatus %>
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <% }) %>
+
                                     </table>
                                 </div>
                             </div>
                         </div>
-    </div>
+                   </div>
+            
                     <div class="customers">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="heading">New customer</h3>
-                                <button>Sell all<span class="fas fa-arrow-right"></span></button>
+                                <h3 class="heading">new customers</h3>
+                                <button onclick="window.location.href='/admin/user/all'">Sell all<span class="fas fa-arrow-right"></span></button>
                             </div>
-    
+                             <%  members.slice(0,4).map(function(value) { %>
                             <div class="card-body">
+                                
                                 <div class="customer">
                                     <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
+                                        <img  style="width: 50px; height: 50px;" src="/img/pizza.png"
                                             alt="">
                                         <div>
-                                            <h4>
-                                                lion Emusky</h4>
-                                            <small>CEO @ TLS</small>
+                                            <h4><%= value.memberNick %></h4>
+                                            <small><%= value.memberEmail %></small>
                                         </div>
                                     </div>
                                     <div class="contact">
@@ -324,104 +197,9 @@
                                         <span class="fas fa-comment"></span>
                                         <span class="fas fa-phone"></span>
                                     </div>
+                                  </div>
+                                  <% }) %>
                                 </div>
-    
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                                            alt="">
-                                        <div>
-                                            <h4>Ion Emusky</h4>
-                                            <small>C0O @ AFK</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                    <span class="fas fa-user-circle"></span>
-                                    <span class="fas fa-comment"></span>
-                                    <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                                            alt="">
-                                        <div>
-                                            <h4>El-lion musky</h4>
-                                            <small>CEO @ FOMO</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                    <span class="fas fa-user-circle"></span>
-                                    <span class="fas fa-comment"></span>
-                                    <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                                            alt="">
-                                        <div>
-                                            <h4>John Bezos</h4>
-                                            <small>CEO @ Mazon</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                        <span class="fas fa-user-circle"></span>
-                                        <span class="fas fa-comment"></span>
-                                        <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                                            alt="">
-                                        <div>
-                                            <h4>Beelz Gai8</h4>
-                                            <small>CEO @ Mycroft</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                        <span class="fas fa-user-circle"></span>
-                                        <span class="fas fa-comment"></span>
-                                        <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                                            alt="">
-                                        <div>
-                                            <h4>Jeam Krook</h4>
-                                            <small>CEO @ Penapple</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                        <span class="fas fa-user-circle"></span>
-                                        <span class="fas fa-comment"></span>
-                                        <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-    
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="https://assets.codepen.io/3853433/internal/avatars/users/default.png?format=auto&version=1617122449&width=40&height=40"
-                                            alt="">
-                                        <div>
-                                            <h4>Cris Coya</h4>
-                                            <small>CEO @ PenCode</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                        <span class="fas fa-user-circle"></span>
-                                        <span class="fas fa-comment"></span>
-                                        <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-    
                             </div>
                         </div>
                     </div>
@@ -431,7 +209,7 @@
             <div class="footer">
         <div class="word">
     
-            <p>Since <span id="hrt"><i class="far fa-heart"></i></span> | Italiano 2022 - <span id="full-year"></span></p>
+            <p style="padding-left: 190px;">Since <span id="hrt"><i class="far fa-heart"></i></span> | Italiano 2022 - <span id="full-year"></span></p>
         </div>
     </div>
     </div>
