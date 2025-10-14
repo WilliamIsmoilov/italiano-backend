@@ -5,6 +5,7 @@ import makeUploader from './libs/utils/uploader';
 import productController from './controllers/product.controller';
 import router from './router';
 import orderController from './controllers/order.controller';
+import reservationController from './controllers/reservation.controller';
 
 routerAdmin.get('/', restaurantController.goHome)
 
@@ -57,5 +58,15 @@ routerAdmin
     restaurantController.varifyRestaurant,
     productController.getAllProducts
 );
+
+
+/** Reservation**/
+routerAdmin
+  .get('/reservation/all', 
+    restaurantController.varifyRestaurant,
+    reservationController.getAllReservations
+
+    
+)
    
 export default routerAdmin;

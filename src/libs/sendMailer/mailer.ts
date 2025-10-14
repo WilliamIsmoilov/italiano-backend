@@ -1,6 +1,9 @@
 import nodemailer, { Transporter } from 'nodemailer';
 import { T } from '../types/common';
 import { Email } from '../types/mailer';
+import fs from 'fs';
+import path from 'path';
+import Handlebars from 'handlebars';
 
 const sendMailer:T = {};
 
@@ -19,7 +22,8 @@ sendMailer.sendMail = async (input: Email): Promise<void> => {
         from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
         to: input.email,
         subject: input.subject,
-        text: input.text
+        text: input.text,
+        html: input.html
     };
 
     const info = await transporter.sendMail(message);

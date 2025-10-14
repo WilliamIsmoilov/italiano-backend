@@ -3,6 +3,7 @@ const router = express.Router();
 import memberController from "./controllers/member.controller";
 import productController from './controllers/product.controller';
 import orderController from './controllers/order.controller';
+import reservationController from './controllers/reservation.controller';
 
 //Member
 router.post('/member/signup', memberController.signup);
@@ -11,6 +12,7 @@ router.post('/member/logout',memberController.varifyAuth, memberController.logou
 router.post('/member/update', memberController.varifyAuth, memberController.updateMember);
 router.post('/order/create', memberController.varifyAuth, orderController.createOrder);
 router.post('/order/update', memberController.varifyAuth, orderController.updateOrder);
+router.post('/reservation/create', memberController.varifyAuth, reservationController.createReservation)
 
 
 
@@ -21,6 +23,10 @@ router.get('/member/detail',memberController.varifyAuth, memberController.getMem
 router.get('/product/all', productController.getProducts);
 router.get('/product/:id', productController.getProduct);
 router.get('/order/all', memberController.varifyAuth, orderController.getMyOrders)
+router.get('/reservation/my', memberController.varifyAuth, reservationController.getMyReservation)
+
+//delete
+router.delete('/reservation/delete/:id', memberController.varifyAuth, reservationController.cancelReservation)
 
    
     

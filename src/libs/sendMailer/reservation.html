@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Rezervatsiya Tasdiqlash</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-top: 5px solid #ff8a00;
+    }
+    h2 {
+      color: #ff8a00;
+      margin-top: 0;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.5;
+    }
+    .details {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #fff3e6; /* asosiy rangning yengilroq varianti */
+      border-left: 5px solid #ff8a00;
+      border-radius: 5px;
+    }
+    .details p {
+      margin: 5px 0;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #999;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Assalomu alaykum, <strong>{{memberNick}}</strong> {{memberLastName}}!</h2>
+    <p>Sizning rezervatsiyangiz muvaffaqiyatli qabul qilindi. Quyidagi ma’lumotlarni tekshirib chiqing:</p>
+
+    <div class="details">
+      <p><strong>Sana:</strong> {{reservationDate}}</p>
+      <p><strong>Vaqt:</strong> {{reservationTime}}</p>
+      <p><strong>Mehmonlar soni:</strong> {{reservationSize}}</p>
+      <p><strong>Maxsus talablar:</strong> {{reservationRequest}}</p>
+    </div>
+
+    <p>Biz bilan birga bo‘lganingiz uchun rahmat! 😊</p>
+
+    <div class="footer">
+      <p>Restaurant <strong>Italiano</strong></p>
+    </div>
+  </div>
+</body>
+</html>

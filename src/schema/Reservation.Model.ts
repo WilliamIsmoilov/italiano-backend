@@ -3,30 +3,31 @@ import mongoose from "mongoose";
 
 const reservationSchema = new Schema({
     memberId:{
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        ref: 'Member', required: true
     },
   reservationDate: {
-    type: Date,
-    required: [true, 'Please choose the date']
+    type: String,
+    required: true
   },
   reservationTime: {
-    type: Date,
-    required: [true, "Please add time"]
+    type: String,
+    required: true
   },
   reservationSize: {
     type: Number,
-    required: [true, 'Please insert party size']
+    required: true
   },
   memberNick:{
     type: String,
-    required: [true, 'Please add your name']
+    required: true
   },
   memberLastName:{
     type: String,
-    required: [true, 'Please add your surname!']
+    required: true
   },
   memberPhone: {
-    type: Number,
+    type: String,
     required: true
   },
   memberEmail: {

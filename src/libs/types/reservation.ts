@@ -3,12 +3,12 @@ import { ObjectId } from "mongoose";
 export interface Reservation{
     _id: ObjectId;
     memberId: ObjectId
-    reservationDate: Date;
-    reservationTime: Date;
-    reservationSize: Number;
+    reservationDate: string;
+    reservationTime: string;
+    reservationSize: number;
     memberNick: string;
     memberLastName: string;
-    memberPhone: number;
+    memberPhone: string;
     memberEmail: string;
     reservationRequest?: string;
     createdAt: Date;
@@ -21,7 +21,7 @@ export interface ReservationInput{
     reservationSize: number;
     memberNick: string;
     memberLastName: string;
-    memberPhone: number;
+    memberPhone: string;
     memberEmail: string;
     reservationRequest?: string; 
 }

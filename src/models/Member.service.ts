@@ -5,7 +5,8 @@ import Errors, { MESSAGE, HTTPCODES } from "../libs/Errors";
 import * as bcryptjs from "bcryptjs";
 import sendMailer from '../libs/sendMailer/mailer';
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
-import { create } from "domain";
+import fs from 'fs';
+import path from 'path';
 
 
 class MemberService {
@@ -104,16 +105,17 @@ class MemberService {
 public async signup(input: MemberInput): Promise<Member>{
   const salt = await bcryptjs.genSalt();
   input.memberPassword = await bcryptjs.hash(input.memberPassword, salt)
-
+  const templatePath = path.join(__dirname, '../libs/sendMailer/signup.html');
+  let htmlContent = fs.readFileSync(templatePath, 'utf8');
+  
   try {
     const result = await this.memberModel.create(input);
     result.memberPassword = '';
+     htmlContent = htmlContent.replace(/{{\s*name\s*}}/g, result.memberNick),
     await sendMailer.sendMail({
       email: result.memberEmail,
       subject: 'Signed up successfully',
-      text:`Assalomu aleykum hurmatli ${result.memberNick}!
-            Ro'yhatdan muvaffaqiyatli o'tkaningiz bilan tabriklaymiz. 
-            , O'ylaymizki bizning restaurant sizga yoqadi`
+      html: htmlContent
             })
     return result.toJSON() as Member;
   } catch (err) {
@@ -127,8 +129,7 @@ public async login(input: LoginInput): Promise<Member>{
   .findOne(
     {memberEmail: input.memberEmail, memberStatus: {$ne: MemberStatus.DELETE}},
     {memberEmail: 1, memberPassword: 1}
-  )
-  .exec();
+  ).exec();
 
   if(!member) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
   else if(member.memberStatus === MemberStatus.BLOCK){
