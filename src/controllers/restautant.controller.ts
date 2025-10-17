@@ -124,19 +124,6 @@ restaurantController.updateChosenUser = async (req: Request, res: Response) => {
     }
 }
 
-// restaurantController.getReservation = async(req: Request, res: Response) => {
-//     try {
-//         console.log('getReservation controller');
-//         const memberId = req.params.memberId;
-//         console.log('getReservation:', memberId)
-        
-//         const result = await memberService.getReservation(memberId);
-//         console.log('result:', result)
-//     } catch (err) {
-//         console.log('Error getReservation', err)
-//         res.redirect('/admin/login')
-//     }
-//}
 
 restaurantController.checkAuthSession =  async (req:AdminRequest, res: Response) =>{
     try {

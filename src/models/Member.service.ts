@@ -116,7 +116,7 @@ public async signup(input: MemberInput): Promise<Member>{
       email: result.memberEmail,
       subject: 'Signed up successfully',
       html: htmlContent
-            })
+       })
     return result.toJSON() as Member;
   } catch (err) {
     console.log("error model:signup", err);

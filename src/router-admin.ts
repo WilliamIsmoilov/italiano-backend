@@ -6,6 +6,7 @@ import productController from './controllers/product.controller';
 import router from './router';
 import orderController from './controllers/order.controller';
 import reservationController from './controllers/reservation.controller';
+import contactController from './controllers/contact.controller';
 
 routerAdmin.get('/', restaurantController.goHome)
 
@@ -64,9 +65,13 @@ routerAdmin
 routerAdmin
   .get('/reservation/all', 
     restaurantController.varifyRestaurant,
-    reservationController.getAllReservations
-
-    
+    reservationController.getAllReservations   
 )
+
+routerAdmin
+ .get('/contact/all',
+    restaurantController.varifyRestaurant,
+    contactController.getContacts  
+ )
    
 export default routerAdmin;

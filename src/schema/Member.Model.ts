@@ -18,7 +18,6 @@ const memberSchema = new Schema({
     memberNick: {
         type: String,
         required: true,
-        unique: true,
     },
 
     memberEmail: {

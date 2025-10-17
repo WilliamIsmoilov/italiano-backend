@@ -28,16 +28,11 @@ public async createReservation(member: Member, input: ReservationInput): Promise
         .replace(/{{\s*reservationRequest\s*}}/g, input.reservationRequest || 'Yo‘q');
     try {
         const result = await this.reservationModel.create({
-            memberId: memberId,
-            memberLastName: input.memberLastName,
+            memberId,
+            ...input,
             memberNick: input.memberNick?.trim() || member.memberNick,
             memberEmail: member.memberEmail,
             memberPhone: input.memberPhone?.trim() || member.memberPhone,
-            reservationDate: input.reservationDate,
-            reservationTime: input.reservationTime,
-            reservationSize: input.reservationSize,
-            reservationRequest: input.reservationRequest || ''
-
         }) 
         await sendMailer.sendMail({
             email: member.memberEmail,
