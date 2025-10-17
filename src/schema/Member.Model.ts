@@ -70,6 +70,12 @@ const memberSchema = new Schema({
     
     memberDesc: {
         type: String,
+    },
+    resetCode: {
+        type: String
+    },
+    resetCodeExpire: {
+        type: Date
     }
 },
    { timestamps: true} //createdAt, updatedAt

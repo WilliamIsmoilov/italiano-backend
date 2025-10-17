@@ -1,4 +1,4 @@
-import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../libs/types/member";
+import { LoginInput, Member, MemberForgotInput, MemberInput, MemberUpdateInput, MemberVerifyInput } from "../libs/types/member";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import MemberModel from "../schema/Member.Model";
 import Errors, { MESSAGE, HTTPCODES } from "../libs/Errors";
@@ -7,6 +7,7 @@ import sendMailer from '../libs/sendMailer/mailer';
 import { shapeIntoMongooseObjectId } from "../libs/utils/config";
 import fs from 'fs';
 import path from 'path';
+import * as bcrypt from 'bcryptjs';
 
 
 class MemberService {
@@ -169,6 +170,57 @@ public async updateMember(
    if(!result) throw new Errors(HTTPCODES.NOT_MODIFIED, MESSAGE.UPDATE_FAILED);
    return result.toObject() as Member;
 }
+
+
+public async forgotPassword(member: Member, input: MemberForgotInput): Promise<Member>{
+
+  const result = await this.memberModel.findOne({memberEmail: input.memberEmail})
+  if(!result) throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND);
+
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  const salt = await bcryptjs.genSalt();
+  const hashedCode = await bcryptjs.hash(code, salt);
+  result.resetCode = hashedCode;
+  result.resetCodeExpire = new Date(Date.now() + 15 * 60 * 1000);
+  await result.save();
+
+  const html = `
+      <h2>Password Reset Verification</h2>
+      <p>Verification code:</p>
+      <h1 style="font-size: 36px; letter-spacing: 5px;">${code}</h1>
+      <p>This code is valid for <b>15 minutes</b>.</p>
+    `;
+    await sendMailer.sendMail({
+      email: member.memberEmail,
+      subject: "Reset Password",
+      html: html
+    })
+
+ return result.toObject() as Member;
+}
+
+// public async verifyResetCode(input: MemberVerifyInput): Promise<Member>{
+  
+//     const result = await this.memberModel.findOne({
+//       email: input.memberEmail,
+//       resetCode: input.resetCode,
+//       resetCodeExpire: { $gt: new Date()}
+//     })
+
+//     if(!result){
+//       throw new Errors(HTTPCODES.NOT_FOUND, MESSAGE.NO_DATA_FOUND)
+//     }
+
+//     const isMatch = await bcrypt.compare(result.resetCode, input.resetCode);
+
+
+//     result.resetCode = undefined;
+//     result.resetCodeExpire = undefined;
+//     await result.save();
+    
+//   return result.toObject()
+// }
+
 
 }
 

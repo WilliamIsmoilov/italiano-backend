@@ -15,6 +15,8 @@ export interface Member{
     memberPhone: string;
     memberPassword?: string;
     memberAddress?: string;
+    resetCode?: string,
+    resetCodeExpire?: Date,
     createdAt: Date;
     updatedAt: Date;
 }
@@ -65,4 +67,14 @@ export interface MemberUpdateInput{
     memberAddress?: string;
     memberDesc?: string;
     memberEmail?:string;
+}
+
+export interface MemberForgotInput{
+    memberEmail: string
+}
+
+export interface MemberVerifyInput{
+    memberEmail?: string,
+    resetCode?: string,
+    resetCodeExpire?: string
 }

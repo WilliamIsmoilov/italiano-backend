@@ -152,5 +152,4 @@ restaurantController.varifyRestaurant = (
 };
 
 
-
 export default restaurantController;

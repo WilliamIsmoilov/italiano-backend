@@ -30,6 +30,8 @@ router.get('/reservation/my', memberController.varifyAuth, reservationController
 //delete
 router.delete('/reservation/delete/:id', memberController.varifyAuth, reservationController.cancelReservation)
 
+router.post('/login/forgotPassword', memberController.forgotPassword )
+
    
     
 

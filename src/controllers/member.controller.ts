@@ -129,5 +129,29 @@ memberController.retrieveAuth =  async (
 }
 
 
+memberController.forgotPassword = async (req:Request, res: Response) => {
+    try {
+        const member: Member = req.body;
+        const input = req.body; 
+        const result = await memberService.forgotPassword(member, input);
+        res.status(200).json(result);
+    } catch (err) {
+        console.log('error on forgotpassword', err)
+    }
+}
+
+
+// memberController.verifyResetCode = async(req: Request, res: Response) => {
+
+//     try {
+//         const input = req.body
+//         console.log('verify Password ')
+//         const result = await memberService.verifyResetCode(input)
+//     } catch (err) {
+//         console.log('error on verifyResetCode', err)
+//     }
+// }
+
+
 
 export default memberController;

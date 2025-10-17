@@ -21,6 +21,7 @@ export enum MESSAGE {
     WRONG_PASSWORD = "Wrong password",
     NOT_AUTHENTICARTED = " YOU ARE NOT AUTHENTICATED, PLEASE LOGIN",
     TOKEN_CREATION_FAILED = "Token creation error",
+    INVALID_CODE = 'Invalid or expired code please check again!'
      
 }
 
