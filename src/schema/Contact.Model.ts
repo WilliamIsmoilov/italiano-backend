@@ -22,8 +22,6 @@ const contactSchema = new Schema({
     },
     contactSubject:{
         type: String,
-        enum: ContactSubject,
-        default: ContactSubject.RECOMMENDATION
     },
     contactMessage: {
         type: String,

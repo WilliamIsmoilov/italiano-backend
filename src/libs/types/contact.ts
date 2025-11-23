@@ -1,4 +1,5 @@
 import { ObjectId, Types } from "mongoose";
+import { ContactSubject } from "../enums/contact.enum";
 
 export interface Contact{
     _id: ObjectId;
@@ -16,6 +17,6 @@ export interface ContactInput{
     memberNick: string,
     memberLastName: string,
     memberEmail: string,
-    contactSubject: string,
+    contactSubject: ContactSubject
     contactMessage: string,
 }

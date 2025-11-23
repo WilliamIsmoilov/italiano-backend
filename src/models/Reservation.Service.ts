@@ -31,7 +31,7 @@ public async createReservation(member: Member, input: ReservationInput): Promise
             memberId,
             ...input,
             memberNick: input.memberNick?.trim() || member.memberNick,
-            memberEmail: member.memberEmail,
+            memberEmail: member.memberEmail?.trim() || member.memberEmail,
             memberPhone: input.memberPhone?.trim() || member.memberPhone,
         }) 
         await sendMailer.sendMail({
