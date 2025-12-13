@@ -212,11 +212,6 @@ header label span {
   padding-left: 1rem;
 }
 
-input {
-  color: #fff;
-  font-size: 15px;
-}
-
 .user-wrapper {
   display: flex;
   align-items: center;
