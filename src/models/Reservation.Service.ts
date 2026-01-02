@@ -7,6 +7,7 @@ import { Reservation, ReservationInput } from "../libs/types/reservation";
 import { Member } from "../libs/types/member";
 import fs from 'fs';
 import path from 'path';
+import { buildReservationDateTime } from "../libs/utils/helper";
 
 
 class ReservationService {
@@ -17,6 +18,15 @@ class ReservationService {
 
 public async createReservation(member: Member, input: ReservationInput): Promise<Reservation>{
    const memberId = shapeIntoMongooseObjectId(member._id)
+   
+   const reservationDateTime = buildReservationDateTime(
+    input.reservationDate,
+    input.reservationTime
+  );
+    if (reservationDateTime <= new Date()) {
+    throw new Errors(HTTPCODES.BAD_REQUEST, MESSAGE.SOMETHING_WENT_WRONG)
+  }
+
    const templatePath = path.join(__dirname, '../libs/sendMailer/reservation.html');
      let htmlContent = fs.readFileSync(templatePath, 'utf8');
      htmlContent = htmlContent
@@ -60,8 +70,7 @@ public async cancelReservation(member: Member, reservationId: string):Promise<vo
   if(limitHours < 8){
     throw new Errors(HTTPCODES.FORBIDDEN, MESSAGE.SOMETHING_WENT_WRONG)
   }
-
-  await this.reservationModel.deleteOne({_id, memberId})
+  await this.reservationModel.deleteOne({_id, memberId}).exec()
 }
 
 public async getAllReservations(): Promise<Reservation[]>{

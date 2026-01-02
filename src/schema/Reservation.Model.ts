@@ -1,5 +1,6 @@
 import { Schema, ObjectId } from 'mongoose';
 import mongoose from "mongoose";
+import { ReservationStatus } from '../libs/enums/reservation.enum';
 
 const reservationSchema = new Schema({
     memberId:{
@@ -36,6 +37,11 @@ const reservationSchema = new Schema({
   },
   reservationRequest: {
     type: String
+  },
+  reservationStatus: {
+    type: String,
+    enum: ReservationStatus,
+    default: ReservationStatus.ACTIVE
   }
 },
 {timestamps: true} // createdAt, updatedAt

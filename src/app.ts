@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import { T } from './libs/types/common';
 import session from 'express-session';
 import ConnectMongoDB from "connect-mongodb-session";
+import { startReservationCron } from './libs/cron/reservation.cron';
 
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore({
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
   next();
 });
 
+startReservationCron();
 
 
 
