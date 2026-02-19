@@ -1,0 +1,5 @@
+Dockerfile
+.env
+docker-compose.yml
+server.ts
+node_modules
