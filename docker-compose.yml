@@ -1,7 +1,9 @@
 services:
     node:
         container_name: ${DOCKER_PROJECT_NAME}_node
-        build: ./docker/node
+        build:  
+            context: .
+            dockerfile: docker/node/Dockerfile
         restart: unless-stopped
         volumes:
             - ./:/var/www/html
