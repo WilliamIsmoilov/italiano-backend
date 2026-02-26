@@ -1,6 +1,6 @@
 FROM node:22.11.0-alpine AS builder
 
-WORKDIR /app
+WORKDIR /var/www/html
 
 
 COPY *.json ./
@@ -14,9 +14,9 @@ RUN npm run build
 
 FROM node:22.11.0-alpine 
 
-WORKDIR /app
+WORKDIR /var/www/html
 
-COPY --from=builder /app ./
+COPY --from=builder /var/www/html ./
 
 EXPOSE 3000
 

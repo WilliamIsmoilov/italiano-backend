@@ -1,12 +1,31 @@
-version: '3.8'
-
 services:
-  app:
-    build:
-      context: ./
-    container_name: italiano-restaurant
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
-    restart: unless-stopped
+    node:
+        container_name: ${DOCKER_PROJECT_NAME}_node
+        build: ./docker/node
+        restart: unless-stopped
+        volumes:
+            - ./:/var/www/html
+            # if you use supervisor
+            #- ./docker/php/supervisor/messenger-worker.conf:/etc/supervisor/conf.d/messenger-worker.conf
+
+    nginx:
+        container_name: ${DOCKER_PROJECT_NAME}_nginx
+        image: nginx:1.28.0
+        restart: unless-stopped
+        volumes:
+            - ./docker/nginx/logs:/var/log/nginx
+            - ./:/var/www/html
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - node
+        ports:
+            - 127.0.0.1:${DOCKER_NGINX_PORT}:80
+
+
+    #    redis:
+    #        image: redis:7.4.4-alpine
+    #        restart: unless-stopped
+    #        container_name: ${DOCKER_PROJECT_NAME}_redis
+
+    # Backup block. Turns on with docker compose --profile backup up -d
+       

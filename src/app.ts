@@ -19,7 +19,7 @@ const store = new MongoDBStore({
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors({credentials: true, origin: true}))
+app.use(cors({credentials: true, origin:true }))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
@@ -32,11 +32,11 @@ app.use(
  session({
      secret: String(process.env.SESSION_SECRET),
       cookie: { 
-    maxAge: 1000 * 3600 * 6, // 6h
+    maxAge: 1000 * 3600 * 6,
    },
    store: store,
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
  })
 );
 
