@@ -1,5 +1,6 @@
 const spanYear = document.querySelector('#full-year')
 const yearSpan = new Date().getFullYear()
+if(spanYear) spanYear.textContent = new Date().getFullYear()
 spanYear.textContent = yearSpan
 let welcome;  
     let date = new Date();  
