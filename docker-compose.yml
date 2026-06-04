@@ -1,35 +1,21 @@
 services:
-    node:
-        container_name: ${DOCKER_PROJECT_NAME}_node
-        build:  
-            context: .
-            dockerfile: docker/node/Dockerfile
-        restart: unless-stopped
-        volumes:
-            - ./:/var/www/html
-        env_file:
-            - .env
-            # if you use supervisor
-            #- ./docker/php/supervisor/messenger-worker.conf:/etc/supervisor/conf.d/messenger-worker.conf
+  node:
+    container_name: ${DOCKER_PROJECT_NAME}_node
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
 
-    nginx:
-        container_name: ${DOCKER_PROJECT_NAME}_nginx
-        image: nginx:1.28.0
-        restart: unless-stopped
-        volumes:
-            - ./docker/nginx/logs:/var/log/nginx
-            - ./:/var/www/html
-            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-        depends_on:
-            - node
-        ports:
-            - 127.0.0.1:${DOCKER_NGINX_PORT}:80
-
-
-    #    redis:
-    #        image: redis:7.4.4-alpine
-    #        restart: unless-stopped
-    #        container_name: ${DOCKER_PROJECT_NAME}_redis
-
-    # Backup block. Turns on with docker compose --profile backup up -d
-       
+  nginx:
+    container_name: ${DOCKER_PROJECT_NAME}_nginx
+    image: nginx:1.28.0
+    restart: unless-stopped
+    volumes:
+      - ./docker/nginx/logs:/var/log/nginx
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - node
+    ports:
+      - 127.0.0.1:${DOCKER_NGINX_PORT}:80
